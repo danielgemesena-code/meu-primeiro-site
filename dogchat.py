@@ -24,7 +24,9 @@ HTML = """
     box-sizing: border-box;
 }
 
-html { scroll-behavior: smooth; }
+html {
+    scroll-behavior: smooth;
+}
 
 body {
     background: #090b16;
@@ -34,9 +36,39 @@ body {
     cursor: none;
 }
 
-a { text-decoration: none; }
+a {
+    text-decoration: none;
+}
 
-/* PATA DO MOUSE */
+/* FUNDOS ANIMADOS */
+
+#spaceCanvas,
+#rainCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+#spaceCanvas {
+    z-index: 0;
+}
+
+#rainCanvas {
+    z-index: 50;
+}
+
+/* CONTEÚDO */
+
+nav,
+main,
+footer {
+    position: relative;
+    z-index: 2;
+}
+
+/* CURSOR DE PATA */
 
 .paw-cursor {
     position: fixed;
@@ -48,6 +80,8 @@ a { text-decoration: none; }
     transform: translate(-50%, -50%);
     filter: drop-shadow(0 0 8px #a78bfa);
 }
+
+/* NAVEGAÇÃO */
 
 nav {
     height: 82px;
@@ -67,7 +101,9 @@ nav {
     color: white;
 }
 
-.logo span { color: #a78bfa; }
+.logo span {
+    color: #a78bfa;
+}
 
 .nav-btn {
     padding: 12px 20px;
@@ -78,7 +114,9 @@ nav {
     transition: .3s;
 }
 
-.nav-btn:hover { background: #635bdb; }
+.nav-btn:hover {
+    background: #635bdb;
+}
 
 /* INÍCIO */
 
@@ -113,6 +151,8 @@ nav {
     font-size: 10px;
     letter-spacing: 1.5px;
     margin-bottom: 30px;
+    position: relative;
+    z-index: 2;
 }
 
 h1 {
@@ -120,6 +160,8 @@ h1 {
     line-height: 1.08;
     font-weight: 900;
     letter-spacing: -4px;
+    position: relative;
+    z-index: 2;
 }
 
 .gradient {
@@ -138,18 +180,111 @@ h1 {
     font-size: 15px;
     line-height: 1.8;
     margin: 24px auto 30px;
+    position: relative;
+    z-index: 2;
 }
 
-.dog {
+/* CHROME ORBIT - LOGO GRANDE */
+
+.hero-orbit {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 28px;
+    perspective: 900px;
+    cursor: pointer;
+    z-index: 2;
+    transition: transform .4s ease;
+}
+
+.hero-orbit .dog {
+    position: relative;
+    z-index: 3;
     width: 190px;
     height: 190px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 50%;
-    border: 3px solid #a78bfa;
-    box-shadow: 0 0 45px #8b5cf655;
-    margin-bottom: 28px;
+    border: 2px solid #c4b5fd;
+    background: #121020;
+    box-shadow: 0 0 35px #8b5cf655;
     animation: float 4s ease-in-out infinite;
 }
+
+.orbit-ring {
+    position: absolute;
+    inset: 15px;
+    border: 3px solid transparent;
+    border-radius: 50%;
+    pointer-events: none;
+    background:
+        linear-gradient(#090b16, #090b16) padding-box,
+        conic-gradient(
+            #ffffff,
+            #8b5cf6,
+            #dbeafe,
+            #475569,
+            #c084fc,
+            #ffffff
+        ) border-box;
+    filter: drop-shadow(0 0 8px #a78bfa);
+}
+
+.ring-one {
+    animation: orbitOne 5s linear infinite;
+}
+
+.ring-two {
+    inset: 25px;
+    animation: orbitTwo 4s linear infinite;
+}
+
+.ring-three {
+    inset: 5px;
+    animation: orbitThree 6s linear infinite;
+}
+
+@keyframes orbitOne {
+    from {
+        transform: rotateX(65deg) rotateZ(0deg);
+    }
+    to {
+        transform: rotateX(65deg) rotateZ(360deg);
+    }
+}
+
+@keyframes orbitTwo {
+    from {
+        transform: rotateY(65deg) rotateZ(360deg);
+    }
+    to {
+        transform: rotateY(65deg) rotateZ(0deg);
+    }
+}
+
+@keyframes orbitThree {
+    from {
+        transform: rotateX(65deg) rotateY(40deg) rotateZ(0deg);
+    }
+    to {
+        transform: rotateX(65deg) rotateY(40deg) rotateZ(360deg);
+    }
+}
+
+.hero-orbit.halo-active {
+    transform: scale(1.08);
+}
+
+.hero-orbit.halo-active .orbit-ring {
+    animation-duration: 1s;
+    filter:
+        drop-shadow(0 0 12px #ffffff)
+        drop-shadow(0 0 25px #a78bfa);
+}
+
+/* BOTÃO DISCORD */
 
 .join {
     display: inline-flex;
@@ -164,6 +299,8 @@ h1 {
     font-weight: 800;
     box-shadow: 0 10px 40px #7048ff55;
     transition: .3s;
+    position: relative;
+    z-index: 2;
 }
 
 .join:hover {
@@ -198,7 +335,7 @@ h1 {
     line-height: 1.7;
 }
 
-/* MEMBROS ANTIGOS */
+/* MEMBROS */
 
 .members {
     max-width: 1050px;
@@ -286,7 +423,7 @@ h1 {
     margin-top: 9px;
 }
 
-/* JOGO EM DESTAQUE */
+/* JOGO */
 
 .games {
     max-width: 950px;
@@ -365,6 +502,8 @@ h1 {
     line-height: 1.7;
 }
 
+/* RODAPÉ */
+
 footer {
     text-align: center;
     padding: 30px 15px;
@@ -372,36 +511,6 @@ footer {
     color: #666b80;
     font-size: 11px;
     letter-spacing: 1px;
-}
-
-/* ONDAS DE ÁGUA */
-
-.ripple {
-    position: fixed;
-    width: 20px;
-    height: 20px;
-    border: 2px solid rgba(139, 92, 246, .8);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    animation: waterRipple .9s ease-out forwards;
-    box-shadow: 0 0 15px rgba(139, 92, 246, .35);
-}
-
-@keyframes waterRipple {
-    0% {
-        width: 10px;
-        height: 10px;
-        opacity: .8;
-        border-width: 2px;
-    }
-    100% {
-        width: 100px;
-        height: 100px;
-        opacity: 0;
-        border-width: 1px;
-    }
 }
 
 /* BOTÃO DE CHUVA */
@@ -426,13 +535,25 @@ footer {
     transform: translateY(-4px);
 }
 
+.rain-button.active {
+    background: linear-gradient(120deg, #312e81, #6b21a8);
+}
+
+/* ANIMAÇÕES */
+
 @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-12px);
+    }
 }
 
 @keyframes shine {
-    to { background-position: 200% center; }
+    to {
+        background-position: 200% center;
+    }
 }
 
 /* RESPONSIVIDADE */
@@ -443,27 +564,31 @@ footer {
         height: 72px;
     }
 
-    .logo { font-size: 19px; }
+    .logo {
+        font-size: 19px;
+    }
 
     .nav-btn {
         font-size: 11px;
         padding: 10px;
     }
 
-    h1 { letter-spacing: -2px; }
+    h1 {
+        letter-spacing: -2px;
+    }
 
     .hero {
         min-height: 620px;
         padding-top: 70px;
     }
 
-    .members {
-        grid-template-columns: repeat(2, 1fr);
+    .hero-orbit {
+        transform: scale(.85);
+        margin-bottom: 5px;
     }
 
-    .dog {
-        width: 150px;
-        height: 150px;
+    .members {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .game-card {
@@ -486,28 +611,37 @@ footer {
 }
 
 @media(max-width: 380px) {
-    .members { grid-template-columns: 1fr; }
+    .members {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (hover: none) {
-    .ripple { display: none; }
-    body { cursor: auto; }
-    .paw-cursor { display: none; }
+    body {
+        cursor: auto;
+    }
+
+    .paw-cursor {
+        display: none;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
         animation-duration: .01ms !important;
         scroll-behavior: auto !important;
     }
-    .ripple { display: none; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- PATA DO CURSOR -->
+<canvas id="spaceCanvas"></canvas>
+<canvas id="rainCanvas"></canvas>
+
 <div class="paw-cursor" id="pawCursor">🐾</div>
 
 <nav>
@@ -515,18 +649,29 @@ footer {
 
     <a href="{{ discord }}" target="_blank"
        rel="noopener noreferrer" class="nav-btn">
-       Discord ↗
+        Discord ↗
     </a>
 </nav>
+
+<main>
 
 <!-- INÍCIO -->
 
 <section class="hero">
+
     <div class="glow"></div>
 
-    <img class="dog"
-      src="https://images.unsplash.com/photo-1551717743-49959800b1f6?w=500"
-      alt="Cachorro DOG CHAT">
+    <div class="hero-orbit" id="heroOrbit">
+
+        <div class="orbit-ring ring-one"></div>
+        <div class="orbit-ring ring-two"></div>
+        <div class="orbit-ring ring-three"></div>
+
+        <img class="dog"
+             src="{{ url_for('static', filename='logo-dois-cachorros.png') }}"
+             alt="Logo DOG CHAT">
+
+    </div>
 
     <div class="tag">
         🐾 SUA NOVA COMUNIDADE TE ESPERA
@@ -544,11 +689,12 @@ footer {
 
     <a href="{{ discord }}" target="_blank"
        rel="noopener noreferrer" class="join">
-       💬 ENTRAR NO DOG CHAT →
+        💬 ENTRAR NO DOG CHAT →
     </a>
+
 </section>
 
-<!-- MEMBROS ANTIGOS -->
+<!-- MEMBROS -->
 
 <section class="section-heading">
     <div class="eyebrow">QUEM FAZ ACONTECER</div>
@@ -587,20 +733,18 @@ footer {
 <!-- PRESIDENTE -->
 
 <section class="president-wrap">
+
     <div class="president">
-
         <div class="crown">👑</div>
-
         <h3>MANU</h3>
-
         <div class="role">
             PRESIDENTE DO DOG CHAT
         </div>
-
     </div>
+
 </section>
 
-<!-- JOGO EM DESTAQUE -->
+<!-- JOGO -->
 
 <section class="section-heading">
     <div class="eyebrow">JOGUE COM A COMUNIDADE</div>
@@ -644,21 +788,23 @@ footer {
 
     <a href="{{ discord }}" target="_blank"
        rel="noopener noreferrer" class="join">
-       ENTRAR NA COMUNIDADE ↗
+        ENTRAR NA COMUNIDADE ↗
     </a>
 
 </section>
+
+</main>
 
 <footer>
     DOG CHAT © 2026 — FEITO COM 🐾 PARA A COMUNIDADE
 </footer>
 
-<!-- ÁUDIO DE CHUVA -->
+<!-- ÁUDIO -->
 
 <audio id="rainSound" loop preload="none">
     <source
-      src="https://cdn.pixabay.com/audio/2022/05/13/audio_257c3a9c9c.mp3"
-      type="audio/mpeg">
+        src="https://cdn.pixabay.com/audio/2022/05/13/audio_257c3a9c9c.mp3"
+        type="audio/mpeg">
 </audio>
 
 <button id="rainButton"
@@ -669,7 +815,9 @@ footer {
 
 <script>
 
-// PATA ACOMPANHANDO O MOUSE
+/* =================================
+   CURSOR DE PATA
+================================= */
 
 const pawCursor = document.getElementById("pawCursor");
 
@@ -679,8 +827,6 @@ document.addEventListener("pointermove", function(e) {
     pawCursor.style.left = e.clientX + "px";
     pawCursor.style.top = e.clientY + "px";
 });
-
-// EFEITO DE CLIQUE NA PATA
 
 document.addEventListener("pointerdown", function() {
     pawCursor.style.transform =
@@ -692,61 +838,384 @@ document.addEventListener("pointerup", function() {
         "translate(-50%, -50%) scale(1)";
 });
 
-// EFEITO DE ÁGUA NO MOUSE
 
-let lastRipple = 0;
+/* =================================
+   CHROME ORBIT
+================================= */
 
-document.addEventListener("pointermove", function(e) {
-    if (e.pointerType !== "mouse") return;
+const heroOrbit = document.getElementById("heroOrbit");
 
-    const now = Date.now();
+let haloTimer;
 
-    if (now - lastRipple < 65) return;
+heroOrbit.addEventListener("click", function() {
 
-    lastRipple = now;
+    heroOrbit.classList.remove("halo-active");
 
-    const ripple = document.createElement("div");
-    ripple.className = "ripple";
+    void heroOrbit.offsetWidth;
 
-    ripple.style.left = e.clientX + "px";
-    ripple.style.top = e.clientY + "px";
+    heroOrbit.classList.add("halo-active");
 
-    document.body.appendChild(ripple);
+    clearTimeout(haloTimer);
 
-    setTimeout(() => ripple.remove(), 950);
+    haloTimer = setTimeout(() => {
+        heroOrbit.classList.remove("halo-active");
+    }, 1900);
+
 });
 
-// CONTROLE DE CHUVA
 
-const rain = document.getElementById("rainSound");
+/* =================================
+   LIGHTSPEED - ESTRELAS
+================================= */
+
+const spaceCanvas = document.getElementById("spaceCanvas");
+const spaceCtx = spaceCanvas.getContext("2d");
+
+let sw, sh, centerX, centerY;
+let stars = [];
+
+function resizeSpace() {
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    sw = window.innerWidth;
+    sh = window.innerHeight;
+
+    centerX = sw / 2;
+    centerY = sh / 2;
+
+    spaceCanvas.width = sw * dpr;
+    spaceCanvas.height = sh * dpr;
+
+    spaceCanvas.style.width = sw + "px";
+    spaceCanvas.style.height = sh + "px";
+
+    spaceCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    stars = [];
+
+    for (let i = 0; i < 150; i++) {
+        createStar(true);
+    }
+}
+
+function createStar(randomDepth = false) {
+
+    stars.push({
+        angle: Math.random() * Math.PI * 2,
+        depth: randomDepth ? Math.random() : 0.05,
+        hue: 245 + Math.random() * 65
+    });
+
+}
+
+function animateSpace() {
+
+    spaceCtx.clearRect(0, 0, sw, sh);
+
+    stars.forEach(star => {
+
+        const distance = Math.max(sw, sh);
+
+        const oldX = centerX +
+            Math.cos(star.angle) * star.depth * distance;
+
+        const oldY = centerY +
+            Math.sin(star.angle) * star.depth * distance;
+
+        star.depth += 0.0035 + star.depth * 0.012;
+
+        const x = centerX +
+            Math.cos(star.angle) * star.depth * distance;
+
+        const y = centerY +
+            Math.sin(star.angle) * star.depth * distance;
+
+        spaceCtx.beginPath();
+        spaceCtx.moveTo(oldX, oldY);
+        spaceCtx.lineTo(x, y);
+
+        spaceCtx.strokeStyle =
+            `hsla(${star.hue}, 100%, 80%, 0.75)`;
+
+        spaceCtx.lineWidth = Math.min(3, 0.5 + star.depth * 2);
+        spaceCtx.stroke();
+
+        if (
+            star.depth > 1.15 ||
+            x < -40 || x > sw + 40 ||
+            y < -40 || y > sh + 40
+        ) {
+            star.angle = Math.random() * Math.PI * 2;
+            star.depth = 0.05;
+        }
+
+    });
+
+    requestAnimationFrame(animateSpace);
+
+}
+
+window.addEventListener("resize", resizeSpace);
+
+resizeSpace();
+animateSpace();
+
+
+/* =================================
+   CHUVA COM COLISÃO E RESPINGOS
+================================= */
+
+const rainCanvas = document.getElementById("rainCanvas");
+const rainCtx = rainCanvas.getContext("2d");
+
 const rainButton = document.getElementById("rainButton");
+const rainSound = document.getElementById("rainSound");
 
-rain.volume = 0.25;
+let rainActive = false;
+let drops = [];
+let splashes = [];
 
-rainButton.addEventListener("click", async () => {
+let rainWidth = 0;
+let rainHeight = 0;
 
-    if (rain.paused) {
+function resizeRain() {
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    rainWidth = window.innerWidth;
+    rainHeight = window.innerHeight;
+
+    rainCanvas.width = rainWidth * dpr;
+    rainCanvas.height = rainHeight * dpr;
+
+    rainCanvas.style.width = rainWidth + "px";
+    rainCanvas.style.height = rainHeight + "px";
+
+    rainCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+}
+
+window.addEventListener("resize", resizeRain);
+
+resizeRain();
+
+
+function createDrop() {
+
+    drops.push({
+        x: Math.random() * rainWidth,
+        y: -Math.random() * rainHeight,
+        speed: 5 + Math.random() * 4,
+        length: 10 + Math.random() * 10,
+        width: 1 + Math.random()
+    });
+
+}
+
+
+/* SUPERFÍCIES DE COLISÃO */
+
+function getRainTargets() {
+
+    const selectors = [
+        "h1", "h2", "h3", "p",
+        "a", "button", ".tag",
+        ".eyebrow", ".role",
+        ".member-avatar", ".game-icon",
+        ".game-card", ".member",
+        ".president", ".dog",
+        ".logo", ".crown"
+    ];
+
+    return [...document.querySelectorAll(selectors.join(","))]
+        .filter(element => {
+
+            const rect = element.getBoundingClientRect();
+            const style = getComputedStyle(element);
+
+            return (
+                rect.width > 0 &&
+                rect.height > 0 &&
+                style.display !== "none" &&
+                style.visibility !== "hidden"
+            );
+
+        })
+        .map(element => element.getBoundingClientRect());
+
+}
+
+
+/* RESPINGOS */
+
+function createSplash(x, y) {
+
+    for (let i = 0; i < 6; i++) {
+
+        splashes.push({
+            x: x,
+            y: y,
+            vx: (Math.random() - 0.5) * 4,
+            vy: -Math.random() * 3,
+            life: 1,
+            size: 1 + Math.random() * 2
+        });
+
+    }
+
+}
+
+
+/* ANIMAÇÃO DA CHUVA */
+
+function animateRain() {
+
+    rainCtx.clearRect(0, 0, rainWidth, rainHeight);
+
+    if (rainActive) {
+
+        const targets = getRainTargets();
+
+        if (drops.length < 250) {
+            for (let i = 0; i < 5; i++) {
+                createDrop();
+            }
+        }
+
+        for (let i = drops.length - 1; i >= 0; i--) {
+
+            const drop = drops[i];
+
+            const previousY = drop.y;
+
+            drop.y += drop.speed;
+
+            let collided = false;
+
+            for (const target of targets) {
+
+                if (
+                    drop.x >= target.left &&
+                    drop.x <= target.right &&
+                    previousY <= target.top &&
+                    drop.y >= target.top &&
+                    drop.y <= target.bottom
+                ) {
+
+                    createSplash(drop.x, target.top);
+
+                    collided = true;
+                    break;
+
+                }
+
+            }
+
+            if (collided || drop.y > rainHeight + 30) {
+                drops.splice(i, 1);
+                continue;
+            }
+
+            rainCtx.beginPath();
+
+            rainCtx.moveTo(drop.x, drop.y);
+
+            rainCtx.lineTo(
+                drop.x - 1,
+                drop.y - drop.length
+            );
+
+            rainCtx.strokeStyle = "rgba(190, 210, 255, 0.75)";
+            rainCtx.lineWidth = drop.width;
+            rainCtx.stroke();
+
+        }
+
+    }
+
+
+    /* DESENHA OS RESPINGOS */
+
+    for (let i = splashes.length - 1; i >= 0; i--) {
+
+        const splash = splashes[i];
+
+        splash.x += splash.vx;
+        splash.y += splash.vy;
+
+        splash.vy += 0.12;
+        splash.life -= 0.055;
+
+        if (splash.life <= 0) {
+            splashes.splice(i, 1);
+            continue;
+        }
+
+        rainCtx.beginPath();
+
+        rainCtx.arc(
+            splash.x,
+            splash.y,
+            splash.size,
+            0,
+            Math.PI * 2
+        );
+
+        rainCtx.fillStyle =
+            `rgba(190, 210, 255, ${splash.life})`;
+
+        rainCtx.fill();
+
+    }
+
+    requestAnimationFrame(animateRain);
+
+}
+
+animateRain();
+
+
+/* =================================
+   CONTROLE DO BOTÃO E DO ÁUDIO
+================================= */
+
+rainSound.volume = 0.25;
+
+rainButton.addEventListener("click", async function() {
+
+    if (!rainActive) {
+
+        rainActive = true;
+
+        rainButton.textContent = "🔊 Desligar chuva";
+
+        rainButton.classList.add("active");
+
+        rainButton.setAttribute("aria-pressed", "true");
 
         try {
-            await rain.play();
-
-            rainButton.textContent = "🔊 Desligar chuva";
-
-            rainButton.setAttribute("aria-pressed", "true");
-
+            await rainSound.play();
         } catch (error) {
-
-            rainButton.textContent = "⚠️ Tente novamente";
-
+            console.warn("O áudio da chuva não pôde ser reproduzido.", error);
         }
 
     } else {
 
-        rain.pause();
+        rainActive = false;
 
         rainButton.textContent = "🌧️ Ligar chuva";
 
+        rainButton.classList.remove("active");
+
         rainButton.setAttribute("aria-pressed", "false");
+
+        rainSound.pause();
+
+        rainSound.currentTime = 0;
+
+        drops = [];
+        splashes = [];
 
     }
 
@@ -758,6 +1227,7 @@ rainButton.addEventListener("click", async () => {
 </html>
 """
 
+
 @app.route("/")
 def home():
     return render_template_string(HTML, discord=DISCORD)
@@ -765,4 +1235,3 @@ def home():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
